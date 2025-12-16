@@ -15,6 +15,7 @@ module.exports = (app,db) => {
 
         try{
             const test = execSync("curl https://letmegooglethat.com/?q="+ req.params.brand)
+            res.type('text/plain');
             res.send(test)
         }
         catch (e){
