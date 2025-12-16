@@ -1,5 +1,6 @@
 'use strict';
 var fs = require('fs');
+const path = require('path');
 
 module.exports = (app, db) => {
 
@@ -24,11 +25,17 @@ module.exports = (app, db) => {
      * @tags beer
      */
     app.get('/v1/beer-pic/', (req, res) => {
-        var filename = req.query.picture,
-            filePath = `../../../uploads/${filename}`;
-        const path = require('path');
+        var filename = req.query.picture;
 
-        fs.readFile(path.join(__dirname, filePath), function (err, data) {
+        // 🔒 Fix Path Traversal
+        if (!filename || filename.includes('..')) {
+            return res.status(400).send("Invalid file name");
+        }
+
+        const uploadDir = path.join(__dirname, '../../../uploads');
+        const filePath = path.join(uploadDir, filename);
+
+        fs.readFile(filePath, function (err, data) {
             if (err) {
                 res.send("error");
             } else {
