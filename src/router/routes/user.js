@@ -199,10 +199,10 @@ module.exports = (app,db) => {
                                 current_user.addBeer(beer, { through: 'user_beers' })
                             }
                             if(front){
-                                let love_beer_message = "You Loved this beer!!"
-                                res.redirect("/beer?user="+ current_user_id+"&id="+beer_id+"&message="+love_beer_message)
+                                 return res.redirect('/beer');
+                                
                             }
-                            res.json(current_user);
+                            return res.json(current_user);
                         })
                     }
                     else{
@@ -248,11 +248,14 @@ module.exports = (app,db) => {
                 if((user[0].password == userPassword) || (md5(user[0].password) == userPassword)){
                     //Add jwt token
                     //logge in logichere
-                    const jwtTokenSecret = "SuperSecret"
+                    const jwtTokenSecret = process.env.JWT_SECRET;
                     const payload = { "id": user[0].id,"role":user[0].role }
                     var token = jwt.sign(payload, jwtTokenSecret, {
-                        expiresIn: 86400, // 24 hours
-                      });
+                        algorithm: 'HS256',
+                        expiresIn: '24h',
+                    });
+
+                    
                     res.status(200).json({
                         jwt:token,
                         user:user,
