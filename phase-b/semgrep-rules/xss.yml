@@ -1,0 +1,10 @@
+rules:
+- id: custom-xss
+  languages: [javascript]
+  message: "User input sent directly in HTTP response (XSS)"
+  severity: ERROR
+  pattern: |
+    res.send($X)
+
+metadata:
+  owasp: "A07: Cross-Site Scripting (XSS)"

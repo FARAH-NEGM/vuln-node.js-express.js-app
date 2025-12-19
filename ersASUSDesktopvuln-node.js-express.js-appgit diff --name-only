@@ -1,0 +1,33 @@
+[1mdiff --git a/src/router/routes/order.js b/src/router/routes/order.js[m
+[1mindex a44b705..f334356 100644[m
+[1m--- a/src/router/routes/order.js[m
+[1m+++ b/src/router/routes/order.js[m
+[36m@@ -1,5 +1,6 @@[m
+ 'use strict';[m
+ var fs = require('fs');[m
+[32m+[m[32mconst path = require('path');[m
+ [m
+ module.exports = (app, db) => {[m
+ [m
+[36m@@ -24,11 +25,17 @@[m [mmodule.exports = (app, db) => {[m
+      * @tags beer[m
+      */[m
+     app.get('/v1/beer-pic/', (req, res) => {[m
+[31m-        var filename = req.query.picture,[m
+[31m-            filePath = `../../../uploads/${filename}`;[m
+[31m-        const path = require('path');[m
+[32m+[m[32m        var filename = req.query.picture;[m
+ [m
+[31m-        fs.readFile(path.join(__dirname, filePath), function (err, data) {[m
+[32m+[m[32m        // 🔒 Fix Path Traversal[m
+[32m+[m[32m        if (!filename || filename.includes('..')) {[m
+[32m+[m[32m            return res.status(400).send("Invalid file name");[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        const uploadDir = path.join(__dirname, '../../../uploads');[m
+[32m+[m[32m        const filePath = path.join(uploadDir, filename);[m
+[32m+[m
+[32m+[m[32m        fs.readFile(filePath, function (err, data) {[m
+             if (err) {[m
+                 res.send("error");[m
+             } else {[m

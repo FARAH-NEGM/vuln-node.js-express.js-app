@@ -1,0 +1,11 @@
+rules:
+  - id: custom-unauthorized-admin-action
+    languages: [javascript]
+    message: "Admin endpoint without explicit authorization check"
+    severity: ERROR
+    patterns:
+      - pattern: app.$METHOD('/admin/$PATH', ...)
+      - pattern-not: |
+          if ($REQ.user.$ROLE === 'admin') { ... }
+    metadata:
+      owasp: "A01: Broken Access Control"

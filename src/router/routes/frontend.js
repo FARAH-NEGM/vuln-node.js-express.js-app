@@ -1,3 +1,4 @@
+const escapeHtml = require('escape-html');
 'user strcit';
 module.exports = (app,db) => {
     //Front End entry page
@@ -9,14 +10,14 @@ module.exports = (app,db) => {
      * @tags frontend
      * @param {string} message.query - a message to present to the user
      */
-     app.get('/', (req,res) =>{
-        console.log(req.session);
-  
-        const nunjucks = require('nunjucks')
-        const message = req.query.message || "Please log in to continue"
-        rendered = nunjucks.renderString(message);
-        res.render('user.html',
-        {message : rendered});
+     
+
+    app.get('/', (req, res) => {
+        res.render('user.html');
+    });
+
+
+
 
 
         // res.render('user',{
@@ -24,7 +25,7 @@ module.exports = (app,db) => {
         //     message: {message:req.query.message}
         // })
         
-    });
+
         //Front End register page
     /**
      * GET /register
@@ -33,13 +34,16 @@ module.exports = (app,db) => {
      * @tags frontend
      * @param {string} message.query - a message to present to the user
      */
- app.get('/register', (req,res) =>{
+ 
 
-    const nunjucks = require('nunjucks')
-    const message = req.query.message || "Please log in to continue"
-    rendered = nunjucks.renderString(message);
-    res.render('user-register.html',
-    {message : rendered});
+app.get('/register', (req, res) => {
+    const rawMessage = req.query.message || "Please log in to continue";
+    const safeMessage = escapeHtml(rawMessage);
+
+    res.render('user-register.html', {
+        message: safeMessage
+    });
+});
 
 
     // res.render('user',{
@@ -47,7 +51,7 @@ module.exports = (app,db) => {
     //     message: {message:req.query.message}
     // })
     
-});
+
     //Front End route to Register
     /**
      * GET /register
@@ -177,48 +181,47 @@ module.exports = (app,db) => {
      * @param {number} user.query.required - User id number of user viewing the page
      * @param {string} relationship - The message a user get when loving a beer (this is shown instead of the relationship)
      */
-     app.get('/beer', (req,res) =>{
+     app.get('/beer', (req,res) => {
 
-        if(!req.query.id){
-            res.redirect("/?message=Could not Access beer please try a different beer")
+    if(!req.query.id){
+        res.redirect("/?message=Could not Access beer please try a different beer");
+        return;
+    }
+
+    db.beer.findAll({
+        include: 'users',
+        where: { id: req.query.id }
+    }).then(beer => {
+
+        if(beer.length === 0){
+            res.redirect('/?message=Beer not found, please try again');
             return;
         }
-        const beer = db.beer.findAll({include: 
-            'users',
-            where: {
-                id: req.query.id
-            }}).then(beer => {
-                if(beer.length == 0){
-                    res.redirect('/?message=Beer not found, please try again')
-                    return;
-                }
-                db.user.findOne({where:{id:req.query.user}}).then( user =>{
-                    if(!user){
-                        res.redirect('/?message=User not found, please try again')
-                        return;
-                    }
-                    user.hasBeer(beer).then(result => {
-                        let love_message
-                        if(result){ // user loves beer
-                            love_message = "You Love THIS BEER!!"
-                        }
-                        else
-                        {//user doesn't love the beer
-                            love_message = "..."
-                        }
-                        if(req.query.relationship){
-                            love_message = req.query.relationship
-                        }
-                        console.log(beer)
 
-            
-                        
-                    
-                    });
-                    res.render('beer.html',
-                        {beers : beer,message:love_message, user:user[0]});     
-                        
-                });    
+        db.user.findOne({ where:{ id:req.query.user } }).then(user => {
+
+            if(!user){
+                res.redirect('/?message=User not found, please try again');
+                return;
+            }
+
+            user.hasBeer(beer).then(result => {
+
+                let love_message = result ? "You Love THIS BEER!!" : "...";
+
+                if(req.query.relationship){
+                    love_message = escapeHtml(req.query.relationship);
+                }
+
+                res.render('beer.html',{
+                    beers : beer,
+                    message: love_message,
+                    user: user
+                });
+
             });
+        });
     });
+});
+
 };

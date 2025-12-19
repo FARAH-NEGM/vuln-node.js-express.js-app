@@ -1,0 +1,10 @@
+rules:
+  - id: custom-insecure-deserialization
+    languages:
+      - javascript
+    message: "User-controlled object deserialization (RCE risk)"
+    severity: ERROR
+    pattern: serialize.unserialize($DATA)
+    metadata:
+      owasp: "A08: Software and Data Integrity Failures"
+

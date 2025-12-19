@@ -1,0 +1,10 @@
+rules:
+  - id: custom-open-redirect
+    languages: [javascript]
+    message: "Possible Open Redirect (user-controlled input)"
+    severity: ERROR
+    pattern: |
+      res.redirect(url)
+    metadata:
+     owasp: "A01: Broken Access Control"
+

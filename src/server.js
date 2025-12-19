@@ -16,6 +16,31 @@ const sjs = require('sequelize-json-schema');
 
 const app = express()
 const PORT = config.PORT;
+
+// 🛡️ Helmet
+const helmet = require('helmet');
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
+
+// 🚦 Rate limit
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use('/login', limiter);
+app.use('/v1/admin', limiter);
+app.use('/v1/user', limiter);
+
+// باقي الميدل وير
+app.use(bodyParser.json());
+
 //OPTIONAL: Security headers?????
 // app.use((req, res, next) => {
 //     res.header('Content-Type', 'application/json');

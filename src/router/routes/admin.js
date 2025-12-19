@@ -90,7 +90,12 @@ module.exports = (app,db) => {
             const xml = req.file.buffer;
             console.log(xml)
             //const doc = libxmljs.parseXml(xml, {noent: true});
-            const doc = libxmljs.parseXml(xml, {noent: true});
+            const doc = libxmljs.parseXml(xml, {
+             noent: false,
+             dtdload: false,
+             dtdattr: false
+             });
+
             //console.log(doc.text());
             const beerName = doc.name;
                 const beerPrice = doc.price;
@@ -108,8 +113,10 @@ module.exports = (app,db) => {
 
             
         } catch (err) {
-            res.send(err.toString());
-            res.sendStatus(500);
+            res.status(500).json({
+            error: "Internal server error"
+             });
+
         }
     });
 };

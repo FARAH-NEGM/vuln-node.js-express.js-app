@@ -1,0 +1,10 @@
+rules:
+- id: custom-sql-injection
+  languages: [javascript]
+  message: "Possible SQL Injection via raw Sequelize query"
+  severity: ERROR
+  pattern: |
+    $DB.sequelize.query($SQL, ...)
+  metadata:
+    owasp: "A03: Injection"
+

@@ -1,0 +1,9 @@
+rules:
+  - id: custom-mass-assignment
+    languages: [javascript]
+    message: "Possible Mass Assignment: user-controlled object passed directly to model"
+    severity: ERROR
+    patterns:
+      - pattern: $MODEL.$FUNC(req.body)
+    metadata:
+      owasp: "A01: Broken Access Control"

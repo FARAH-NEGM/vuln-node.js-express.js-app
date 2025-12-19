@@ -15,7 +15,12 @@ module.exports = (app,db) => {
     app.get('/v1/admin/users/', (req,res) =>{
         //console.log("auth",req.headers.authorization)
         if (req.headers.authorization){ 
-        const user_object = jwt.verify(req.headers.authorization.split(' ')[1],"SuperSecret")
+        const token = req.headers.authorization.split(' ')[1];
+
+        const user_object = jwt.verify(token, process.env.JWT_SECRET, {
+        algorithms: ['HS256']
+        });
+
         db.user.findAll({include: "beers"})
             .then((users) => {
                 if (user_object.role =='admin'){
@@ -82,7 +87,6 @@ module.exports = (app,db) => {
 
         const userEmail = req.body.email;
         const userName = req.body.name;
-        const userRole = req.body.role
         const userPassword = req.body.password;
         const userAddress = req.body.address
         //validate email using regular expression
@@ -93,16 +97,14 @@ module.exports = (app,db) => {
                 res.json({error:"regular expression of email couldn't be validated"})
                 return
             }
-        const new_user = db.user.create(
-            {
-                name:userName,
-                email:userEmail,
-                role:userRole,
-                address:userAddress,
-                password:userPassword
-            }).then(new_user => {
-                res.json(new_user);
-            })
+        const new_user = db.user.create({
+        name: userName,
+        email: userEmail,
+        role: "user",   // 👈 forced
+        address: userAddress,
+        password: userPassword
+        })
+
                 
 
     });
@@ -334,7 +336,12 @@ module.exports = (app,db) => {
             }},
             )
         .then((user)=>{
-            res.send(user)
+            res.json({
+            id: user.id,
+            username: user.username,
+            role: user.role
+});
+
         })
 
                 
@@ -362,7 +369,12 @@ module.exports = (app,db) => {
             }}
             )
         .then((user)=>{
-            res.send(user)
+            res.json({
+            id: user.id,
+            username: user.username,
+            role: user.role
+           });
+
         })
 
                 
@@ -404,11 +416,15 @@ module.exports = (app,db) => {
             // or
             //const isValid = authenticator.verify({ userToken, GeneratedToken });
                if(isValid || userToken == req.session.otp){
-                   const jwtTokenSecret = "SuperSecret"
-                   const payload = { "id": user.id,"role":user.role }
-                   var jwttoken = jwt.sign(payload, jwtTokenSecret, {
-                       expiresIn: 86400, // 24 hours
-                     });
+                 const jwtTokenSecret = process.env.JWT_SECRET;
+
+                const payload = { id: user.id, role: user.role };
+
+                const jwttoken = jwt.sign(payload, jwtTokenSecret, {
+                algorithm: 'HS256',
+              expiresIn: '24h'
+});
+
                    res.status(200).json({
                        jwt:jwttoken,
                        user:user,

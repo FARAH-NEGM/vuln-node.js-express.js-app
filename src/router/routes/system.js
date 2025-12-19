@@ -10,20 +10,28 @@ module.exports = (app,db) => {
      * @tags system
      * @param {string} brand.path.required - the beer brand you want to test
      */
-    app.get('/v1/status/:brand', (req,res) =>{
-        var execSync = require('child_process').execSync;
+    const axios = require('axios');
 
-        try{
-            const test = execSync("curl https://letmegooglethat.com/?q="+ req.params.brand)
-            res.type('text/plain');
-            res.send(escapeHtml(test.toString()))
+app.get('/v1/status/:brand', async (req, res) => {
+  const brand = req.params.brand;
 
-        }
-        catch (e){
-            console.log(e)
-        }
-        
-    });
+  // allowlist
+  const allowedBrands = ['google', 'facebook', 'twitter'];
+
+  if (!allowedBrands.includes(brand)) {
+    return res.status(400).json({ error: 'Invalid brand' });
+  }
+
+  try {
+    const response = await axios.get(
+      `https://letmegooglethat.com/?q=${brand}`
+    );
+    res.json({ status: response.status });
+  } catch (e) {
+    res.status(500).json({ error: 'Request failed' });
+  }
+});
+
         //redirect user to brand
     /**
      * GET /v1/redirect/
@@ -32,16 +40,26 @@ module.exports = (app,db) => {
      * @tags system
      * @param {string} url.query.required - the beer brand you want to redirect to
      */
-     app.get('/v1/redirect/', (req,res) =>{
-    var url = req.query.url
-    console.log(url)
-    if(url){
-        res.redirect(url);
-    } else{
-        next()
-    }
-        
-    });
+     const { URL } = require('url');
+
+app.get('/v1/redirect', (req, res) => {
+  const page = req.query.page;
+
+  const allowedPages = [
+    '/home',
+    '/login',
+    '/products'
+  ];
+
+  if (!page || !allowedPages.includes(page)) {
+    return res.status(400).json({ error: 'Invalid redirect destination' });
+  }
+
+  res.redirect(page);
+});
+
+
+
     //initialize list of beers
     /**
      * POST /v1/init/
@@ -61,12 +79,19 @@ module.exports = (app,db) => {
      * @param {object} request.body.required - the beer brand you want to test
      */
      app.post('/v1/init', (req,res) =>{
-        var serialize = require('node-serialize');
-        const body = req.body.object;
-        var deser = serialize.unserialize(body)
-        console.log(deser)
-        
-    });
+    const body = req.body.object;
+
+    let deser;
+    try {
+        deser = JSON.parse(body);
+    } catch (e) {
+        return res.status(400).json({ error: "Invalid input" });
+    }
+
+    console.log(deser);
+    res.status(200).json({ status: "OK" });
+});
+
     //perform a test on an endpoint
     /**
      * GET /v1/test/

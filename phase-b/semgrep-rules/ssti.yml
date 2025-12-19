@@ -1,0 +1,10 @@
+rules:
+  - id: custom-ssti
+    languages:
+      - javascript
+    message: "Server-Side Template Injection via renderString"
+    severity: ERROR
+    pattern: nunjucks.renderString($TEMPLATE)
+    metadata:
+      owasp: "A04: Insecure Design"
+

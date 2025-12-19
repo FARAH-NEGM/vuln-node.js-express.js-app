@@ -1,0 +1,215 @@
+[33mcommit c465d230623759dc43897807ee445880768b2114[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfix/vulnerabilities[m[33m)[m
+Author: FARAH-NEGM <149680630+FARAH-NEGM@users.noreply.github.com>
+Date:   Tue Dec 16 23:57:45 2025 +0200
+
+    Fix Path Traversal in beer image endpoint
+
+[33mcommit 5c0fa86fa3aaec6250dfd37f671eef57c1b46354[m
+Author: FARAH-NEGM <149680630+FARAH-NEGM@users.noreply.github.com>
+Date:   Tue Dec 16 23:28:28 2025 +0200
+
+    Fix Reflected XSS by returning plain text response
+
+[33mcommit 0b169137c0064306f4096d47a2a8189d6a279508[m
+Author: FARAH-NEGM <149680630+FARAH-NEGM@users.noreply.github.com>
+Date:   Tue Dec 16 22:35:46 2025 +0200
+
+    Fix SQL Injection in beer search endpoint
+
+[33mcommit b977c7407f328da929577745ad509639e26c428a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: SirAppSec <89794666+SirAppSec@users.noreply.github.com>
+Date:   Tue Aug 27 01:48:44 2024 +0300
+
+    Update README.md
+
+[33mcommit c02f4ccec70431fe8bbac85c65ab8448dd4e752a[m
+Author: umlal <umlal@router.network>
+Date:   Mon Aug 5 11:40:41 2024 -0400
+
+    disable logging
+
+[33mcommit f0b1e7ef1b6ee8b9b63814e503cd84575e586288[m
+Author: SirAppSec <sirappsec@gmail.com>
+Date:   Tue Jul 30 20:39:47 2024 -0400
+
+    package.json fix typo, server.js enable json swagger
+
+[33mcommit 5fbb8af5e6a7b7d94adf05aaf0cc0525301b94f5[m
+Author: SirAppSec <sirappsec@gmail.com>
+Date:   Tue Jul 30 20:25:42 2024 -0400
+
+    README.md update installation
+
+[33mcommit f641524b2bf19c9fc3ea495422399e093e4bd817[m
+Author: SirAppSec <sirappsec@gmail.com>
+Date:   Tue Jul 30 20:13:01 2024 -0400
+
+    package.json start script to save logs
+
+[33mcommit 17c2df08489154dd7175e6ea861b590e8ef58b18[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Tue Dec 6 18:15:53 2022 +0200
+
+    add dockerhub
+
+[33mcommit 24e3e3cb0c48a7a5a6d8a2ab0243fb473e826f03[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Mon Aug 15 01:10:24 2022 -0700
+
+     fix
+
+[33mcommit d120efecc850a0f737a86bb1991d7ff3e02b41fc[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Mon Aug 15 01:08:13 2022 -0700
+
+    Introducing a beer profile, prototype pollution wip
+
+[33mcommit c086162ab1a7ae03047189053d72af1571d572af[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Wed Aug 10 15:20:42 2022 -0700
+
+    fixed add beer
+
+[33mcommit d6cb57efd8414a55ae677944f8f2bfb35e5c0e41[m
+Author: SirAppSec <89794666+SirAppSec@users.noreply.github.com>
+Date:   Fri Aug 5 03:54:39 2022 +0300
+
+    Update README.md
+
+[33mcommit 8a66bb31a0388e7dcdcb252e8664c2c8b207810c[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Fri Aug 5 03:27:25 2022 +0300
+
+    Added Stored Xss, fixed frontend register
+
+[33mcommit 990af347954100284154912bdd0878cc35477e15[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Tue Aug 2 15:52:33 2022 +0300
+
+    test
+
+[33mcommit ec290415557199fa677d91d869066cb4eec1320b[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sun Jul 31 23:52:36 2022 +0300
+
+    added template engine-jinja, XSS and SSTI
+
+[33mcommit 03dc5bc28284eb73f5408c3468b26680141a19d0[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sun Jul 31 11:43:52 2022 +0300
+
+    clean up
+
+[33mcommit fe72f563e309d61d10641e02c3e7deec51002f95[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sun Jul 31 11:39:09 2022 +0300
+
+    Added ReDos
+
+[33mcommit 959e433ae73f64c4f06c70b5171c5b837d1851bb[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sun Jul 31 10:05:07 2022 +0300
+
+     ssrf and broken function level
+
+[33mcommit a0a47bdf07e1ffadcb5562514568f2150a74fd60[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sun Jul 31 02:24:38 2022 +0300
+
+    insecure deserialization
+
+[33mcommit 541329dfc6b71f1f375a286690c3e76478b7026d[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sun Jul 31 01:41:03 2022 +0300
+
+    fixes
+
+[33mcommit 92a2d8afb6927174988f51d2abdc69d614812b2e[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sat Jul 30 19:38:41 2022 +0300
+
+    implemented OTP
+
+[33mcommit f65279fe421b0fa3ace88a8b9871514d8817e3a5[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sat Jul 30 18:38:36 2022 +0300
+
+    added BOLA/Mass assignment, update user, promote, privesc(vertical+horizontal)
+
+[33mcommit 46798c0c512bc215871b8e0fb994cb4ef034cfa0[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sat Jul 30 15:28:27 2022 +0300
+
+    add loved beer sequelize association
+
+[33mcommit 5f342dfbfa1aae723fea938d730de3f81ad75aa4[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sat Jul 30 04:20:21 2022 +0300
+
+    path traversal added in beer-pic route
+
+[33mcommit 9c188cf572c03aacc6d0cda99c739f3179ac92c0[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Sat Jul 30 01:57:45 2022 +0300
+
+    added login - user enumeration
+
+[33mcommit cef04b4dca073de112883ac6f478852c9b03494e[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Fri Jul 29 18:19:20 2022 +0300
+
+    xml parsing and sqli
+
+[33mcommit ad4b2c571ec6dc8fff2563eca0b0d7bd5287600b[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Thu Jul 28 09:43:19 2022 +0300
+
+    instanciate user routes
+
+[33mcommit 8d2570b4b7bfa9f3e38349d7d72b964245df4d92[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Thu Jul 28 09:21:44 2022 +0300
+
+    clean up + added User entity
+
+[33mcommit 571820778bb22aa578cf00cb9afeb02fa90dcabe[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Thu Jul 28 01:40:03 2022 +0300
+
+    better implementation of swagger generated from comments
+
+[33mcommit 9f6f21f82164521db080f8e5b5813cdece17d1c4[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Wed Jul 27 03:38:37 2022 +0300
+
+    swagger support at /api-docs
+
+[33mcommit 47479128da3abdbad9ab6aab4fdfc06076dbd7e4[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Tue Jul 26 18:48:59 2022 +0300
+
+    added routes /order and /new-beer
+
+[33mcommit 2383a6ca4ca307c43b7f1f3e86a94a3c75af0e1b[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Tue Jul 26 16:16:46 2022 +0300
+
+    add orm
+
+[33mcommit 40f73e06555e602ca6a969547193ee1f184deb6f[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Tue Jul 26 12:27:31 2022 +0300
+
+    init entities and router
+
+[33mcommit 0fc141983db2e434b7e977eaf12f61874893827a[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Tue Jul 26 11:06:58 2022 +0300
+
+    init
+
+[33mcommit 8b76bd3cae41d9c0b07f4b2a111421bdfab7327e[m
+Author: Amit.Srour <amit.srour@ab-inbev.com>
+Date:   Tue Jul 26 10:51:48 2022 +0300
+
+    init

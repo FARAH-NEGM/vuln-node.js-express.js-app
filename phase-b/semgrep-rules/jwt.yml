@@ -1,0 +1,10 @@
+rules:
+- id: custom-jwt-secret
+  languages: [javascript]
+  message: "Hardcoded JWT secret detected"
+  severity: ERROR
+  pattern: |
+    jwt.sign($PAYLOAD, "SuperSecret", ...)
+  metadata:
+    owasp: "A02: Cryptographic Failures"
+
