@@ -5,6 +5,3 @@ rules:
   severity: ERROR
   pattern: |
     $DB.sequelize.query($SQL, ...)
-  metadata:
-    owasp: "A03: Injection"
-

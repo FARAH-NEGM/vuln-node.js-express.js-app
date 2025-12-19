@@ -1,0 +1,9 @@
+rules:
+  - id: custom-session-insecure
+    languages:
+      - javascript
+    message: "Insecure session configuration detected"
+    severity: WARNING
+    patterns:
+      - pattern: app.use(session($X))
+      - pattern: secret:"$SECRET"

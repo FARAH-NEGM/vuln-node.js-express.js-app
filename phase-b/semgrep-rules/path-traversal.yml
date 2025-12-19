@@ -5,6 +5,3 @@ rules:
     message: "User input used in file system path"
     severity: ERROR
     pattern: fs.readFile(path.join(__dirname, $P), $CB)
-    metadata:
-      owasp: "A03: Injection"
-

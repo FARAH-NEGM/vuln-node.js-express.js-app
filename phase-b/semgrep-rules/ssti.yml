@@ -5,6 +5,3 @@ rules:
     message: "Server-Side Template Injection via renderString"
     severity: ERROR
     pattern: nunjucks.renderString($TEMPLATE)
-    metadata:
-      owasp: "A04: Insecure Design"
-

@@ -5,6 +5,3 @@ rules:
   severity: ERROR
   pattern: |
     res.send($X)
-
-metadata:
-  owasp: "A07: Cross-Site Scripting (XSS)"

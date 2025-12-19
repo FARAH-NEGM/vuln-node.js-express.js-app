@@ -5,6 +5,3 @@ rules:
   severity: ERROR
   pattern: |
     jwt.sign($PAYLOAD, "SuperSecret", ...)
-  metadata:
-    owasp: "A02: Cryptographic Failures"
-

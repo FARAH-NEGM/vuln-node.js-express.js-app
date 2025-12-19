@@ -5,6 +5,3 @@ rules:
     message: "User-controlled object deserialization (RCE risk)"
     severity: ERROR
     pattern: serialize.unserialize($DATA)
-    metadata:
-      owasp: "A08: Software and Data Integrity Failures"
-
